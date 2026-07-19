@@ -13,7 +13,7 @@
 
 set -u
 
-VERSION="1.0.0"
+VERSION="1.0.1"
 
 # Common DKIM selectors probed when --selector is not given.
 DKIM_PROBE_SELECTORS=(default mail dkim s1 s2 k1 google)
@@ -398,8 +398,10 @@ check_dkim() {
 
   if ((found == 0)); then
     if ((probing)); then
-      emit FAIL DKIM "no DKIM key found at common selectors (${DKIM_PROBE_SELECTORS[*]})"
-      fix "re-run with --selector <name> — your selector is in your signer config (e.g. opendkim KeyTable)"
+      # selectors can't be enumerated from outside — a probe miss is not proof
+      # of a missing key, so this is inconclusive, never a hard failure
+      emit WARN DKIM "inconclusive: no key at common selectors (${DKIM_PROBE_SELECTORS[*]})"
+      fix "re-run with --selector <name> for a definitive verdict — it's in your signer config (e.g. opendkim KeyTable)"
     else
       emit FAIL DKIM "no DKIM record at ${SELECTORS//,/ or } for $DOMAIN"
       fix "publish the public key as TXT at <selector>._domainkey.$DOMAIN"

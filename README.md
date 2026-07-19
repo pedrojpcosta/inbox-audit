@@ -2,7 +2,7 @@
 
 [![ShellCheck](https://github.com/inboxauditkit/inbox-audit/actions/workflows/shellcheck.yml/badge.svg)](https://github.com/inboxauditkit/inbox-audit/actions/workflows/shellcheck.yml)
 
-Find out in 30 seconds why your email lands in spam.
+Find out in 30 seconds what Gmail and Yahoo hold against your mail setup.
 
 `inbox-audit` is a single-file bash script that audits one domain's email
 deliverability posture against the Gmail/Yahoo sender requirements: SPF, DKIM,
@@ -38,7 +38,7 @@ dependency. That makes it cron-able: run it nightly and alert on non-zero.
 
 ```
 $ ./inbox-audit.sh example.com --selector mail
-inbox-audit 1.0.0 — example.com
+inbox-audit 1.0.1 — example.com
 
 [PASS] SPF    one v=spf1 record; 4/10 DNS lookups; terminal qualifier '-all'
 [WARN] DKIM   1 selector(s) with a published key
@@ -77,10 +77,12 @@ They're fine tools. This one runs locally, works offline from any shell, has no
 rate limits, keeps your domain list private, and exits with meaningful codes so
 you can script it, cron it, and diff it. Different tool for a different habit.
 
-**DKIM says "no key found at common selectors".**
+**DKIM says "inconclusive: no key at common selectors".**
 DKIM selectors are arbitrary names — there's no way to enumerate them from
-outside. Pass yours: `--selector mail2024`. It's in your signer config
-(OpenDKIM `KeyTable`, rspamd `dkim_signing.conf`, or your provider's docs).
+outside, which is why a probe miss is reported as inconclusive rather than a
+failure. Pass yours for a definitive verdict: `--selector mail2024`. It's in
+your signer config (OpenDKIM `KeyTable`, rspamd `dkim_signing.conf`, or your
+provider's docs).
 
 **Everything passes but my mail still lands in spam.**
 DNS is the foundation, not the whole house. Content, volume patterns, list
