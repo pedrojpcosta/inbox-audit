@@ -9,7 +9,7 @@
 #
 # Exit codes: 0 all checks pass, 1 warnings, 2 failures, 3 usage/dependency error.
 #
-# https://github.com/inboxauditkit/inbox-audit — MIT license.
+# https://github.com/pedrojpcosta/inbox-audit — MIT license.
 
 set -u
 

@@ -1,6 +1,6 @@
 # inbox-audit
 
-[![ShellCheck](https://github.com/inboxauditkit/inbox-audit/actions/workflows/shellcheck.yml/badge.svg)](https://github.com/inboxauditkit/inbox-audit/actions/workflows/shellcheck.yml)
+[![ShellCheck](https://github.com/pedrojpcosta/inbox-audit/actions/workflows/shellcheck.yml/badge.svg)](https://github.com/pedrojpcosta/inbox-audit/actions/workflows/shellcheck.yml)
 
 Find out in 30 seconds what Gmail and Yahoo hold against your mail setup.
 
@@ -15,7 +15,7 @@ rules tightened.
 ## Quick start
 
 ```sh
-curl -O https://raw.githubusercontent.com/inboxauditkit/inbox-audit/main/inbox-audit.sh
+curl -O https://raw.githubusercontent.com/pedrojpcosta/inbox-audit/main/inbox-audit.sh
 chmod +x inbox-audit.sh
 ./inbox-audit.sh example.com
 ```
